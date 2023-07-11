@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import Footer from "./components/Footer";
+import { fetchData } from "./service/dataFetch";
 
 export const App = () => {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <>
       <Header />
