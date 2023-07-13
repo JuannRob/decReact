@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
+import Tab from "./Tab";
 
 const Search = () => {
   let { state } = useLocation();
@@ -13,9 +14,7 @@ const Search = () => {
   return (
     <div className="inline h-80 w-1/2 bg-main-color text-white">
       {isLoading && <div>Cargando...</div>}
-      <ul>
-        {data && data.docs.map((dec) => <li key={dec._id}>{dec.num}</li>)}
-      </ul>
+      {data && <Tab data={data.docs} />}
     </div>
   );
 };

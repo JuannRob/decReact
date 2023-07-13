@@ -16,18 +16,19 @@ const Search = () => {
   };
 
   return (
-    <Box sx={{ border: 1 }}>
+    <>
       <TextField
         id="outlined-basic"
+        name="num"
         label="Outlined"
         variant="outlined"
         value={searchString}
         onChange={handleChange}
       />
-      <Button variant="text" color="primary">
+      <Button variant="text" color="primary" onClick={handleClick}>
         Buscar!
       </Button>
-    </Box>
+    </>
   );
 };
 

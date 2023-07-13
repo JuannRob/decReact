@@ -11,7 +11,7 @@ export function useFetch(param) {
     (async function () {
       try {
         setIsLoading(true);
-        const response = await axios.get("http://localhost:5000/decretos", {
+        const response = await axios.get("http://192.168.1.25:5000/decretos", {
           params,
         });
         setData(response.data);
