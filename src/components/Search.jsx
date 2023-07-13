@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
+import { Box, TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
-  return <div className="inline h-80 w-1/2 bg-main-color text-white">Coso</div>;
+  const [searchString, setSearchString] = useState("");
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/decretos", { state: searchString });
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setSearchString(e.target.value);
+  };
+
+  return (
+    <Box sx={{ border: 1 }}>
+      <TextField
+        id="outlined-basic"
+        label="Outlined"
+        variant="outlined"
+        value={searchString}
+        onChange={handleChange}
+      />
+      <Button variant="text" color="primary">
+        Buscar!
+      </Button>
+    </Box>
+  );
 };
 
 export default Search;

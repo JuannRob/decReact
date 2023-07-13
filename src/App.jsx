@@ -1,23 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import Footer from "./components/Footer";
-import { fetchData } from "./service/dataFetch";
+import Results from "./components/Results";
+import Details from "./components/Details";
+import { Container } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
 
 export const App = () => {
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <>
       <Header />
 
-      <main>
-        <div className="flex min-h-screen items-center justify-center bg-main-background">
-          <Search />
-        </div>
-      </main>
+      <Container>
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path="/decretos" element={<Results />}>
+            <Route path=":decreto" element={<Details />} />
+          </Route>
+        </Routes>
+      </Container>
 
       <Footer />
     </>
