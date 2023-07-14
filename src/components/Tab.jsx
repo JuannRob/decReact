@@ -14,7 +14,8 @@ const Tab = ({ data }) => {
         <TableHead>
           <TableRow>
             <TableCell>Decreto</TableCell>
-            <TableCell align="right">Firma</TableCell>
+            <TableCell align="left">Firma</TableCell>
+            <TableCell align="left">Tema</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -23,10 +24,15 @@ const Tab = ({ data }) => {
               key={dec._id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" sx={{ width: "20%" }}>
                 {dec.num}/{dec.anho}
               </TableCell>
-              <TableCell align="right">{dec.firma}</TableCell>
+              <TableCell align="left" sx={{ width: "20%" }}>
+                {dec.firma}
+              </TableCell>
+              <TableCell sx={{ width: "40%", textAlign: "start" }} align="left">
+                {dec.tema}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

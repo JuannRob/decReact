@@ -1,6 +1,8 @@
 import axios from "redaxios";
 import { useEffect, useState } from "react";
 
+const BASE_URL = "https://declar-api.onrender.com";
+
 export function useFetch(param) {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -11,7 +13,7 @@ export function useFetch(param) {
     (async function () {
       try {
         setIsLoading(true);
-        const response = await axios.get("http://192.168.1.25:5000/decretos", {
+        const response = await axios.get(`${BASE_URL}/decretos`, {
           params,
         });
         setData(response.data);
