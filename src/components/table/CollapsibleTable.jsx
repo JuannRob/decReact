@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   Table,
   TableBody,
@@ -6,9 +6,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-} from "@mui/material";
-import Row from "./Row";
+  Paper
+} from '@mui/material'
+import Row from './Row'
 
 const CollapsibleTable = ({ data }) => {
   return (
@@ -29,6 +29,6 @@ const CollapsibleTable = ({ data }) => {
         </TableBody>
       </Table>
     </TableContainer>
-  );
-};
-export default CollapsibleTable;
+  )
+}
+export default CollapsibleTable

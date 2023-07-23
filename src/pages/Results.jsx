@@ -1,15 +1,15 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
-import CollapsibleTable from "../components/table/CollapsibleTable";
+import React from 'react'
+import { useLocation } from 'react-router-dom'
+import { useFetch } from '../hooks/useFetch'
+import CollapsibleTable from '../components/table/CollapsibleTable'
 
 const Results = () => {
-  const { state } = useLocation();
+  const { state } = useLocation()
 
-  const { data, isLoading, error } = useFetch(state);
+  const { data, isLoading, error } = useFetch(state)
 
   if (error) {
-    console.log(error);
+    console.log(error)
   }
 
   return (
@@ -17,7 +17,7 @@ const Results = () => {
       {isLoading && <div>Cargando...</div>}
       {data && <CollapsibleTable data={data.docs} />}
     </div>
-  );
-};
+  )
+}
 
-export default Results;
+export default Results

@@ -1,11 +1,10 @@
-import React from "react";
-import Header from "./components/layout/Header";
-import Search from "./pages/Search";
-import Footer from "./components/layout/Footer";
-import Results from "./pages/Results";
-import Details from "./pages/Details";
-import { Container, Box } from "@mui/material";
-import { Route, Routes } from "react-router-dom";
+import React from 'react'
+import Header from './components/layout/Header'
+import Search from './pages/Search'
+import Footer from './components/layout/Footer'
+import Results from './pages/Results'
+import Details from './pages/Details'
+import { Route, Routes } from 'react-router-dom'
 
 export const App = () => {
   return (
@@ -24,5 +23,5 @@ export const App = () => {
 
       <Footer />
     </div>
-  );
-};
+  )
+}

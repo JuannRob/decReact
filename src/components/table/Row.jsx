@@ -1,15 +1,15 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
-import { TableCell, TableRow, Collapse, Box, IconButton } from "@mui/material";
-import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import * as React from 'react'
+import { Link } from 'react-router-dom'
+import { TableCell, TableRow, Collapse, Box, IconButton } from '@mui/material'
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material'
 
 const Row = (props) => {
-  const { dec } = props;
-  const [open, setOpen] = React.useState(false);
+  const { dec } = props
+  const [open, setOpen] = React.useState(false)
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -44,7 +44,7 @@ const Row = (props) => {
         </TableCell>
       </TableRow>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default Row;
+export default Row

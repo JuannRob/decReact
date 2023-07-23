@@ -1,20 +1,20 @@
-import React from "react";
-import { TextField, IconButton } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
+import React from 'react'
+import { TextField, IconButton } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import SearchIcon from '@mui/icons-material/Search'
 
 const SearchBar = ({ searchQuery, setSearchQuery }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/decretos", { state: searchString });
-  };
+    e.preventDefault()
+    navigate('/decretos', { state: searchQuery })
+  }
 
   const handleInput = (e) => {
-    e.preventDefault();
-    setSearchQuery(e.target.value);
-  };
+    e.preventDefault()
+    setSearchQuery(e.target.value)
+  }
 
   return (
     <form>
@@ -29,10 +29,10 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
         value={searchQuery}
       />
       <IconButton type="submit" aria-label="search" onSubmit={handleSubmit}>
-        <SearchIcon style={{ fill: "blue" }} />
+        <SearchIcon style={{ fill: 'blue' }} />
       </IconButton>
     </form>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import SearchBar from "../components/search-bar/SearchBar";
+import React, { useState } from 'react'
+import SearchBar from '../components/search-bar/SearchBar'
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('')
   return (
     <>
       <div className="w-full p-2">
@@ -15,7 +15,7 @@ const Search = () => {
       </div>
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search

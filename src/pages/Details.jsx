@@ -1,9 +1,9 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 const Details = () => {
-  const { num, anho, fecha, tema, link_pub, firma } = useLocation().state;
-  const fechaFormat = new Date(fecha);
+  const { num, anho, fecha, tema, link_pub: linkPub, firma } = useLocation().state
+  const fechaFormat = new Date(fecha)
 
   return (
     <div className="inline h-80 w-1/2 bg-main-color text-white">
@@ -21,11 +21,11 @@ const Details = () => {
           </li>
         )}
         <li>
-          <a href={link_pub}>Ver Decreto</a>
+          <a href={linkPub}>Ver Decreto</a>
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details
