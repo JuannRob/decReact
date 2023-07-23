@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "./components/Header";
-import Search from "./components/Search";
-import Footer from "./components/Footer";
-import Results from "./components/Results";
-import Details from "./components/Details";
+import Header from "./components/layout/Header";
+import Search from "./pages/Search";
+import Footer from "./components/layout/Footer";
+import Results from "./pages/Results";
+import Details from "./pages/Details";
 import { Container, Box } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 
@@ -12,31 +12,15 @@ export const App = () => {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <Container
-        maxWidth="md"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          flexGrow: 1,
-          justifyContent: "center",
-        }}
-      >
-        <Box
-          sx={{
-            width: "100%",
-            backgroundColor: "#252d35",
-            marginY: "20px",
-            padding: "10px",
-          }}
-        >
+      <div className="container flex w-3/4 flex-grow flex-col justify-center self-center">
+        <div className="wrapper w-full bg-main-color p-5">
           <Routes>
             <Route path="/" element={<Search />} />
-            <Route path="/decretos" element={<Results />}>
-              <Route path=":decreto" element={<Details />} />
-            </Route>
+            <Route path="/decretos" element={<Results />} />
+            <Route path="/decretos/details" element={<Details />} />
           </Routes>
-        </Box>
-      </Container>
+        </div>
+      </div>
 
       <Footer />
     </div>

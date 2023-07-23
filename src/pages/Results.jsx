@@ -1,10 +1,11 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
-import Tab from "./Tab";
+import CollapsibleTable from "../components/table/CollapsibleTable";
 
-const Search = () => {
-  let { state } = useLocation();
+const Results = () => {
+  const { state } = useLocation();
+
   const { data, isLoading, error } = useFetch(state);
 
   if (error) {
@@ -14,9 +15,9 @@ const Search = () => {
   return (
     <div className="inline h-80 w-1/2 bg-main-color text-white">
       {isLoading && <div>Cargando...</div>}
-      {data && <Tab data={data.docs} />}
+      {data && <CollapsibleTable data={data.docs} />}
     </div>
   );
 };
 
-export default Search;
+export default Results;
