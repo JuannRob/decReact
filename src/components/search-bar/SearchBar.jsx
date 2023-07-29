@@ -1,37 +1,17 @@
 import React from 'react'
-import { TextField, IconButton } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-import SearchIcon from '@mui/icons-material/Search'
+import { TextField } from '@mui/material'
 
-const SearchBar = ({ searchQuery, setSearchQuery }) => {
-  const navigate = useNavigate()
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    navigate('/decretos', { state: searchQuery })
-  }
-
-  const handleInput = (e) => {
-    e.preventDefault()
-    setSearchQuery(e.target.value)
-  }
-
+const SearchBar = () => {
   return (
-    <form>
       <TextField
         id="search-bar"
+        name="num"
         className="text"
-        onInput={handleInput}
-        label="Enter a city name"
+        label="Ingrese el número"
         variant="outlined"
-        placeholder="Search..."
+        placeholder="341 o :23"
         size="small"
-        value={searchQuery}
       />
-      <IconButton type="submit" aria-label="search" onSubmit={handleSubmit}>
-        <SearchIcon style={{ fill: 'blue' }} />
-      </IconButton>
-    </form>
   )
 }
 
