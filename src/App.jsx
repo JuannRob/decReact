@@ -12,7 +12,7 @@ export const App = () => {
       <Header />
 
       <div className="container flex w-3/4 flex-grow flex-col justify-center self-center">
-        <div className="wrapper w-full bg-main-color p-5">
+        <div className="wrapper w-full bg-main-color p-5 my-11 xl:my-0">
           <Routes>
             <Route path="/" element={<Search />} />
             <Route path="/decretos" element={<Results />} />

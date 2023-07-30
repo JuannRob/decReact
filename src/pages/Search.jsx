@@ -1,7 +1,32 @@
 import React from 'react'
 // import SearchBar from '../components/search-bar/SearchBar'
-import { TextField } from '@mui/material'
+import { TextField, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+
+const inputColor = {
+  input: { color: 'white' },
+  color: 'white',
+  '& label.Mui-focused': {
+    color: 'white'
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'white'
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'white'
+    },
+    '&:hover fieldset': {
+      borderColor: 'white'
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'white'
+    }
+  },
+  '& .MuiInputLabel-root': {
+    color: 'white'
+  }
+}
 
 const Search = () => {
   const navigate = useNavigate()
@@ -29,7 +54,7 @@ const Search = () => {
           publicados en el Boletín Oficial (Período 2011-2015)
         </p>
       </div>
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form flex flex-col items-center [&>.text]:w-1/2 gap-3 py-5' onSubmit={handleSubmit}>
       <TextField
         id="search-bar"
         name="num"
@@ -38,6 +63,7 @@ const Search = () => {
         variant="outlined"
         placeholder="341 o :23"
         size="small"
+        sx={ inputColor }
       />
       <TextField
         id="search-bar"
@@ -47,6 +73,7 @@ const Search = () => {
         variant="outlined"
         placeholder="2011"
         size="small"
+        sx={ inputColor }
       />
       <TextField
         id="search-bar"
@@ -56,8 +83,9 @@ const Search = () => {
         variant="outlined"
         placeholder="Herrera"
         size="small"
+        sx={ inputColor }
       />
-      <button type='submit'>Buscar!</button>
+      <Button variant="contained" type="submit"> Buscar </Button>
       {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> */}
       </form>
     </>
