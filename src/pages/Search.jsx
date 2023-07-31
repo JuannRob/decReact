@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import SearchBar from '../components/search-bar/SearchBar'
 import { TextField, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { styled } from '@mui/material/styles'
+
+/* Collapsible List */
+import IconButton from '@mui/material/IconButton'
+import Collapse from '@mui/material/Collapse'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props
+  return <IconButton {...other} />
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest
+  })
+}))
 
 const inputColor = {
   input: { color: 'white' },
@@ -30,6 +47,11 @@ const inputColor = {
 
 const Search = () => {
   const navigate = useNavigate()
+  const [expanded, setExpanded] = useState(false)
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -86,6 +108,17 @@ const Search = () => {
         sx={ inputColor }
       />
       <Button variant="contained" type="submit"> Buscar </Button>
+      <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+      </Collapse>
+
       {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> */}
       </form>
     </>
