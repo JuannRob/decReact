@@ -11,7 +11,7 @@ export const App = () => {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <div className="container flex w-3/4 flex-grow flex-col justify-center self-center">
+      <div className="container flex w-3/4 xl:w-3/5 flex-grow flex-col justify-center self-center">
         <div className="wrapper w-full bg-main-color p-5 my-11 xl:my-0">
           <Routes>
             <Route path="/" element={<Search />} />

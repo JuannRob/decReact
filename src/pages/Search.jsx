@@ -1,68 +1,50 @@
 import React, { useState } from 'react'
-// import SearchBar from '../components/search-bar/SearchBar'
-import { TextField, Button } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
-import { styled } from '@mui/material/styles'
-
-/* Collapsible List */
-import IconButton from '@mui/material/IconButton'
-import Collapse from '@mui/material/Collapse'
+import { Button, IconButton, Collapse } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props
-  return <IconButton {...other} />
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest
-  })
-}))
-
-const inputColor = {
-  input: { color: 'white' },
-  color: 'white',
-  '& label.Mui-focused': {
-    color: 'white'
-  },
-  '& .MuiInput-underline:after': {
-    borderBottomColor: 'white'
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'white'
-    },
-    '&:hover fieldset': {
-      borderColor: 'white'
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'white'
-    }
-  },
-  '& .MuiInputLabel-root': {
-    color: 'white'
-  }
-}
+import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import { useNavigate } from 'react-router-dom'
+import filters from '../data/filters'
+// import CustomSearchBar from '../components/search-bar/CustomSearchBar'
 
 const Search = () => {
+  const initialInputs = [
+    { paramName: '', paramValue: '', isDisable: true },
+    { paramName: '', paramValue: '', isDisable: true },
+    { paramName: '', paramValue: '', isDisable: true },
+    { paramName: '', paramValue: '', isDisable: true }
+  ]
+
   const navigate = useNavigate()
   const [expanded, setExpanded] = useState(false)
+  const [inputs, setInputs] = useState(initialInputs)
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded)
+  const handleParamChange = (i, e) => {
+    const newInputs = [...inputs]
+    newInputs[i].paramName = e.target.value
+    newInputs[i].isDisable = false
+    setInputs(newInputs)
   }
 
-  const handleSubmit = (e) => {
+  const handleValueChange = (i, e) => {
+    const newInputs = [...inputs]
+    newInputs[i].paramValue = e.target.value
+    setInputs(newInputs)
+  }
+
+  const handleExpand = () => {
+    setExpanded((prevExpanded) => !prevExpanded)
+  }
+
+  const handleSubmit = e => {
     e.preventDefault()
     const formData = new window.FormData(e.target)
     for (const pair of formData) {
+      console.log(pair)
       if (pair[1] === '') {
         formData.delete(pair[0])
       }
     }
     const fields = Object.fromEntries(formData)
-    console.log(fields)
     navigate('/decretos', { state: fields })
   }
 
@@ -76,51 +58,62 @@ const Search = () => {
           publicados en el Boletín Oficial (Período 2011-2015)
         </p>
       </div>
-      <form className='form flex flex-col items-center [&>.text]:w-1/2 gap-3 py-5' onSubmit={handleSubmit}>
-      <TextField
-        id="search-bar"
-        name="num"
-        className="text"
-        label="Ingrese el número"
-        variant="outlined"
-        placeholder="341 o :23"
-        size="small"
-        sx={ inputColor }
-      />
-      <TextField
-        id="search-bar"
-        name="anho"
-        className="text"
-        label="Ingrese el año"
-        variant="outlined"
-        placeholder="2011"
-        size="small"
-        sx={ inputColor }
-      />
-      <TextField
-        id="search-bar"
-        name="firma"
-        className="text"
-        label="Ingrese firmante"
-        variant="outlined"
-        placeholder="Herrera"
-        size="small"
-        sx={ inputColor }
-      />
-      <Button variant="contained" type="submit"> Buscar </Button>
-      <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-      </Collapse>
-
-      {/* <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> */}
+      <form id="searchForm" className="form flex items-center [&>.text]:w-1/2 gap-3 py-5 text-black" onSubmit={handleSubmit}>
+        <input
+          id="search-bar"
+          name="num"
+          className="text"
+          label="Ingrese el número"
+          placeholder="341 o :23"
+        />
+        <input
+          id="search-bar"
+          name="anho"
+          className="text"
+          label="Ingrese el año"
+          placeholder="2011"
+        />
       </form>
+      <Button form="searchForm" variant="contained" type="submit"> Buscar </Button>
+      <div className="flex justify-end items-center">
+        <span>Búsqueda avanzada</span>
+        <IconButton
+          size="large"
+          edge="end"
+          aria-label="expand"
+          onClick={handleExpand}
+          sx={{ color: 'white' }}
+        >
+          {expanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
+        </IconButton>
+      </div>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <div className="p-4 w-full text-black">
+          {inputs.map((input, i) => (
+            <div key={i}>
+              <select value={input.paramName} onChange={(e) => handleParamChange(i, e)}>
+                <option value="" disabled selected hidden>Otros filtros</option>
+                {Object.keys(filters).map((item, i) => {
+                  return (
+                    <option key={i} value={item}>
+                      {filters[item]}
+                    </option>
+                  )
+                })}
+              </select>
+              <input
+                type="text"
+                form="searchForm"
+                name={input.paramName}
+                value={input.paramValue}
+                onChange={(e) => handleValueChange(i, e)}
+                disabled={input.isDisable}
+              />
+            </div>
+          ))}
+
+        </div>
+      </Collapse>
     </>
   )
 }
