@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { IconButton, Collapse } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
+import SearchIcon from '@mui/icons-material/Search'
 import { useNavigate } from 'react-router-dom'
 import filters from '../data/filters'
 import '../components/search-bar/SearchBar.css'
@@ -46,11 +47,12 @@ const Search = () => {
       }
     }
     const fields = Object.fromEntries(formData)
+    console.log(fields)
     navigate('/decretos', { state: fields })
   }
 
   return (
-    <>
+    <div className="wrapper w-full bg-main-color p-5 my-11 xl:my-0">
       <div className="w-full p-2">
         <h1 className="text-center text-2xl">
           Buscador de Decretos de la Función Ejecutiva de La Rioja
@@ -59,7 +61,7 @@ const Search = () => {
           publicados en el Boletín Oficial (Período 2011-2015)
         </p>
       </div>
-      <form id="searchForm" className="form p-3 flex items-center [&>.text]:w-1/2 gap-3 py-5 text-black" onSubmit={handleSubmit}>
+      <form id="searchForm" className="form p-3 flex items-center [&>.text]:w-1/2 gap-3 py-5" onSubmit={handleSubmit}>
         <input
           id="search-bar"
           name="num"
@@ -74,7 +76,9 @@ const Search = () => {
           label="Ingrese el año"
           placeholder="2011"
         />
-        <button form="searchForm" type="submit" className='border p-2 rounded text-white'> Buscar </button>
+        <IconButton type="submit" aria-label="search" sx={{ border: '1px solid white', borderRadius: 2, padding: 0.5 }}>
+          <SearchIcon sx={{ color: 'white', fontSize: 35, margin: 0 }} />
+        </IconButton>
       </form>
       <div className="flex justify-end items-center">
         <span>Búsqueda avanzada</span>
@@ -101,7 +105,7 @@ const Search = () => {
                 disabled={input.isDisable}
               />
               <select value={input.paramName} onChange={(e) => handleParamChange(i, e)}>
-                <option value="" disabled selected hidden>Otros filtros</option>
+                <option value="" disabled hidden>Otros filtros</option>
                 {filters.map((filter, i) => {
                   return (
                     <option key={i} value={filter.id}>
@@ -114,7 +118,7 @@ const Search = () => {
           ))}
         </div>
       </Collapse>
-    </>
+    </div>
   )
 }
 

@@ -16,10 +16,10 @@ const CollapsibleTable = ({ data }) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell />
-            <TableCell align="center">Decreto</TableCell>
-            <TableCell align="center">Firma</TableCell>
-            <TableCell align="center">Tema</TableCell>
+            <TableCell sx={{ width: '10%' }}/>
+            <TableCell align="center" sx={{ width: '10%' }}>Decreto</TableCell>
+            <TableCell align="center" sx={{ width: '15%' }}>Firma</TableCell>
+            <TableCell align="center" sx={{ width: '65%' }}>Tema</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

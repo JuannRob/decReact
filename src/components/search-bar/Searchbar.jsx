@@ -44,7 +44,7 @@ function CustomSearchBar ({ formName, inputColor }) {
   }
 
   return (
-        <FormControl fullWidth className="flex flex-row">
+        <FormControl fullWidth className="flex flex-col">
             <div>
                 <InputLabel id="">{filters[searchItem]}</InputLabel>
                 <Select

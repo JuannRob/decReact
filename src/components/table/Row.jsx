@@ -9,8 +9,8 @@ const Row = (props) => {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-        <TableCell>
+      <TableRow sx={{ '& > *': { borderBottom: 'unset' }, height: 120 }}>
+        <TableCell sx={{ width: '10%' }}>
           <IconButton
             aria-label="expand row"
             size="small"
@@ -19,13 +19,13 @@ const Row = (props) => {
             {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell component="th" scope="row" align="center" sx={{ verticalAlign: 'top', width: '10%' }}>
           <Link to="details" state={dec}>
             {dec.num}/{dec.anho}
           </Link>
         </TableCell>
-        <TableCell align="right">{dec.firma}</TableCell>
-        <TableCell align="left">{dec.tema}</TableCell>
+        <TableCell align="center" sx={{ verticalAlign: 'top', width: '15%' }}>{dec.firma}</TableCell>
+        <TableCell align="left" sx={{ width: '65%', verticalAlign: 'top' }}>{dec.tema}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

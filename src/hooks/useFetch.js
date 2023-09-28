@@ -1,7 +1,8 @@
 import axios from 'redaxios'
 import { useEffect, useState } from 'react'
 
-const BASE_URL = 'https://declar-api.onrender.com'
+// const BASE_URL = 'https://declar-api.onrender.com'
+const BASE_URL = 'http://localhost:5000'
 
 export function useFetch (queries) {
   const [data, setData] = useState(null)
@@ -14,7 +15,7 @@ export function useFetch (queries) {
       try {
         setIsLoading(true)
         const response = await axios.get(`${BASE_URL}/decretos`, { params })
-        setData(response.data)
+        setData(response.data.data)
       } catch (err) {
         setError(err)
       } finally {
