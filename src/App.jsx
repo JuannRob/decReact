@@ -11,7 +11,7 @@ export const App = () => {
     <div className="flex min-h-screen flex-col">
       <Header />
 
-      <div className="container flex w-3/4 xl:w-3/5 flex-grow flex-col justify-center self-center">
+      <div className="container flex w-3/4 xl:w-3/5 flex-grow flex-col justify-center self-center relative">
           <Routes>
             <Route path="/" element={<Search />} />
             <Route path="/decretos" element={<Results />} />
