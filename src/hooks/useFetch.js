@@ -1,8 +1,7 @@
 import axios from 'redaxios'
 import { useEffect, useState } from 'react'
 
-// const BASE_URL = 'https://declar-api.onrender.com'
-const BASE_URL = 'http://localhost:5000'
+const BASE_URL = process.env.URL || 'http://localhost:5000'
 
 export function useFetch (query, deps = []) {
   const [data, setData] = useState(null)
