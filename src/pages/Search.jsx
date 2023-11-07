@@ -4,9 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'
 import SearchIcon from '@mui/icons-material/Search'
 import { useNavigate } from 'react-router-dom'
-import filters from '../data/filters'
-import '../components/search-bar/SearchBar.css'
-// import CustomSearchBar from '../components/search-bar/CustomSearchBar'
+import AdvSearchBar from '../components/search-bar/AdvSearchBar'
 
 const Search = () => {
   const initialInputs = [
@@ -41,13 +39,11 @@ const Search = () => {
     e.preventDefault()
     const formData = new window.FormData(e.target)
     for (const pair of formData) {
-      console.log(pair)
       if (pair[1] === '') {
         formData.delete(pair[0])
       }
     }
     const fields = Object.fromEntries(formData)
-    console.log(fields)
     navigate('/decretos', { state: fields })
   }
 
@@ -95,26 +91,7 @@ const Search = () => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="p-3 w-full m-auto text-white gap-4 grid grid-cols-2">
           {inputs.map((input, i) => (
-            <div key={i} className="inputBox">
-              <input
-                type="text"
-                form="searchForm"
-                name={input.paramName}
-                value={input.paramValue}
-                onChange={(e) => handleValueChange(i, e)}
-                disabled={input.isDisable}
-              />
-              <select value={input.paramName} onChange={(e) => handleParamChange(i, e)}>
-                <option value="" disabled hidden>Otros filtros</option>
-                {filters.map((filter, i) => {
-                  return (
-                    <option key={i} value={filter.id}>
-                      {filter.title}
-                    </option>
-                  )
-                })}
-              </select>
-            </div>
+            <AdvSearchBar key={i} index={i} input={input} handleParamChange={handleParamChange} handleValueChange={handleValueChange}/>
           ))}
         </div>
       </Collapse>
