@@ -8,32 +8,15 @@ import AdvSearchBar from '../components/search-bar/AdvSearchBar'
 
 const Search = () => {
   const initialInputs = [
-    { paramName: '', paramValue: '', isDisable: true },
-    { paramName: '', paramValue: '', isDisable: true },
-    { paramName: '', paramValue: '', isDisable: true },
-    { paramName: '', paramValue: '', isDisable: true }
+    { fieldName: '', inputValue: '', isDisabled: true },
+    { fieldName: '', inputValue: '', isDisabled: true },
+    { fieldName: '', inputValue: '', isDisabled: true },
+    { fieldName: '', inputValue: '', isDisabled: true }
   ]
 
   const navigate = useNavigate()
   const [expanded, setExpanded] = useState(false)
-  const [inputs, setInputs] = useState(initialInputs)
-
-  const handleParamChange = (i, e) => {
-    const newInputs = [...inputs]
-    newInputs[i].paramName = e.target.value
-    newInputs[i].isDisable = false
-    setInputs(newInputs)
-  }
-
-  const handleValueChange = (i, e) => {
-    const newInputs = [...inputs]
-    newInputs[i].paramValue = e.target.value
-    setInputs(newInputs)
-  }
-
-  const handleExpand = () => {
-    setExpanded((prevExpanded) => !prevExpanded)
-  }
+  const [advInputs, setAdvInputs] = useState(initialInputs)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -82,7 +65,7 @@ const Search = () => {
           size="large"
           edge="end"
           aria-label="expand"
-          onClick={handleExpand}
+          onClick={() => setExpanded((prevExpanded) => !prevExpanded)}
           sx={{ color: 'white' }}
         >
           {expanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
@@ -90,8 +73,8 @@ const Search = () => {
       </div>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <div className="p-3 w-full m-auto text-white gap-4 grid grid-cols-2">
-          {inputs.map((input, i) => (
-            <AdvSearchBar key={i} index={i} input={input} handleParamChange={handleParamChange} handleValueChange={handleValueChange}/>
+          {advInputs.map((currentInput, i) => (
+            <AdvSearchBar key={i} index={i} currentInput={currentInput} advInputs={advInputs} setAdvInputs={setAdvInputs}/>
           ))}
         </div>
       </Collapse>

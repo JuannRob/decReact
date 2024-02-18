@@ -2,26 +2,11 @@ import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useFetch } from '../hooks/useFetch'
 import CollapsibleTable from '../components/table/CollapsibleTable'
-import Pagination from '@mui/material/Pagination'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import filters from '../data/filters'
 import './Result.css'
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import PaginationBar from '../components/PaginationBar'
 
-const theme = createTheme({
-  components: {
-    MuiPagination: {
-      styleOverrides: {
-        root: {
-          button: {
-            color: '#fff',
-            border: '1px solid #fff'
-          }
-        }
-      }
-    }
-  }
-})
 
 const Results = () => {
   const [checked, setChecked] = useState(true)
@@ -33,17 +18,10 @@ const Results = () => {
     order: 1
   })
 
-  // [options] le pasa el valor que tiene que usar el useEffect para actualizar
+  // [options] is useFetch's dependency array
   const { data, isLoading, error } = useFetch({ ...state, ...options }, [options])
 
-  function handleChange (e, currentPage) {
-    setOptions({
-      ...options,
-      page: currentPage
-    })
-  }
-
-  function handleSelectChange (e) {
+  function handleSelectChange(e) {
     const selectedValue = e.target.value
     setOptions({
       ...options,
@@ -54,7 +32,7 @@ const Results = () => {
     console.log(error)
   }
 
-  function handleSwitch () {
+  function handleSwitch() {
     if (checked) {
       setOptions({
         ...options,
@@ -92,20 +70,18 @@ const Results = () => {
               </Select>
             </FormControl>
             <div className="checkbox-wrapper-35">
-              <input value="private" name="switch" id="switch" type="checkbox" className="switch" defaultChecked={checked} onClick={handleSwitch}/>
-                <label htmlFor="switch">
-                  <span className="switch-x-toggletext">
-                    <span className="switch-x-unchecked"><span className="switch-x-hiddenlabel">Unchecked: </span>Descendente</span>
-                    <span className="switch-x-checked"><span className="switch-x-hiddenlabel">Checked: </span>Ascendente</span>
-                  </span>
-                </label>
+              <input value="private" name="switch" id="switch" type="checkbox" className="switch" defaultChecked={checked} onClick={handleSwitch} />
+              <label htmlFor="switch">
+                <span className="switch-x-toggletext">
+                  <span className="switch-x-unchecked"><span className="switch-x-hiddenlabel">Unchecked: </span>Descendente</span>
+                  <span className="switch-x-checked"><span className="switch-x-hiddenlabel">Checked: </span>Ascendente</span>
+                </span>
+              </label>
             </div>
           </div>
           <div className="wrapper bg-main-color p-6 flex justify-center items-center flex-col">
             <CollapsibleTable data={data.docs} />
-            <ThemeProvider theme={theme}>
-              <Pagination className='pt-5' count={data.totalPages} page={data.page} onChange={handleChange} variant="outlined" shape="rounded" />
-            </ThemeProvider>
+            <PaginationBar options={options} setOptions={setOptions} currentPage={data.page} totalPages={data.totalPages} />
           </div>
         </div>}
     </>

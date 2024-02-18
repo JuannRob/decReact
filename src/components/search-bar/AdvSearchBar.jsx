@@ -2,18 +2,31 @@ import React from 'react'
 import './AdvSearchBar.css'
 import filters from '../../data/filters'
 
-function AdvSearchBar ({ index, input, handleValueChange, handleParamChange }) {
+function AdvSearchBar ({ index, currentInput, advInputs, setAdvInputs }) {
+  const handleParamChange = (i, e) => {
+    const newInputs = [...advInputs]
+    newInputs[i].fieldName = e.target.value
+    newInputs[i].isDisabled = false
+    setAdvInputs(newInputs)
+  }
+
+  const handleValueChange = (i, e) => {
+    const newInputs = [...advInputs]
+    newInputs[i].inputValue = e.target.value
+    setAdvInputs(newInputs)
+  }
+
   return (
     <div className="inputBox">
       <input
         type="text"
         form="searchForm"
-        name={input.paramName}
-        value={input.paramValue}
+        name={currentInput.fieldName}
+        value={currentInput.inputValue}
         onChange={(e) => handleValueChange(index, e)}
-        disabled={input.isDisable}
+        disabled={currentInput.isDisabled}
       />
-      <select value={input.paramName} onChange={(e) => handleParamChange(index, e)}>
+      <select value={currentInput.fieldName} onChange={(e) => handleParamChange(index, e)}>
         <option value="" disabled hidden>Otros filtros</option>
         {filters.map((filter, i) => {
           return (
