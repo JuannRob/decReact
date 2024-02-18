@@ -86,7 +86,7 @@ const Results = () => {
               >
                 {filters.map((filter, i) => {
                   return (
-                    <MenuItem key={i} value={filter.id}>{filter.title}</MenuItem>
+                    <MenuItem key={i} value={filter.slug}>{filter.title}</MenuItem>
                   )
                 })}
               </Select>

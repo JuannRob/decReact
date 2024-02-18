@@ -17,7 +17,7 @@ function AdvSearchBar ({ index, input, handleValueChange, handleParamChange }) {
         <option value="" disabled hidden>Otros filtros</option>
         {filters.map((filter, i) => {
           return (
-            <option key={i} value={filter.id}>
+            <option key={i} value={filter.slug}>
               {filter.title}
             </option>
           )
