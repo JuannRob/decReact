@@ -2,54 +2,49 @@ import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useFetch } from '../hooks/useFetch'
 import CollapsibleTable from '../components/table/CollapsibleTable'
-import filters from '../data/filters'
+import { fullFilters as filters } from '../data/filters'
 import './Result.css'
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import PaginationBar from '../components/PaginationBar'
 
-
 const Results = () => {
-  const [checked, setChecked] = useState(true)
-  const { state } = useLocation()
-  const [options, setOptions] = useState({
+  const initialOptions = {
     limit: 10,
     page: 1,
     sortBy: 'num',
     order: 1
-  })
+  }
+
+  const [checked, setChecked] = useState(true)
+  const { state } = useLocation()
+  const [options, setOptions] = useState(initialOptions)
 
   // [options] is useFetch's dependency array
   const { data, isLoading, error } = useFetch({ ...state, ...options }, [options])
 
-  function handleSelectChange(e) {
+  if (error) {
+    console.log(error)
+  }
+
+  function handleSelectChange (e) {
     const selectedValue = e.target.value
     setOptions({
       ...options,
       sortBy: selectedValue
     })
   }
-  if (error) {
-    console.log(error)
-  }
 
-  function handleSwitch() {
-    if (checked) {
-      setOptions({
-        ...options,
-        order: -1
-      })
-    } else {
-      setOptions({
-        ...options,
-        order: 1
-      })
-    }
+  function handleSwitch () {
     setChecked(!checked)
+    setOptions({
+      ...options,
+      order: checked ? -1 : 1
+    })
   }
 
   return (
     <>
-      {isLoading && <div>Cargando...</div>}
+      {isLoading && <CircularProgress />}
       {data &&
         <div className='w-full flex my-11 xl:my-15'>
           <div className='w-1/4 p-10 absolute -left-80'>
@@ -60,7 +55,7 @@ const Results = () => {
                 id="demo-simple-select"
                 label="Orderna Por"
                 onChange={handleSelectChange}
-                defaultValue=""
+                defaultValue={initialOptions.sortBy}
               >
                 {filters.map((filter, i) => {
                   return (
@@ -79,7 +74,7 @@ const Results = () => {
               </label>
             </div>
           </div>
-          <div className="wrapper bg-main-color p-6 flex justify-center items-center flex-col">
+          <div className="wrapper w-full bg-main-color p-6 flex justify-center items-center flex-col">
             <CollapsibleTable data={data.docs} />
             <PaginationBar options={options} setOptions={setOptions} currentPage={data.page} totalPages={data.totalPages} />
           </div>

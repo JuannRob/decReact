@@ -1,6 +1,6 @@
 import React from 'react'
 import './AdvSearchBar.css'
-import filters from '../../data/filters'
+import { filters } from '../../data/filters'
 
 function AdvSearchBar ({ index, currentInput, advInputs, setAdvInputs }) {
   const handleParamChange = (i, e) => {
